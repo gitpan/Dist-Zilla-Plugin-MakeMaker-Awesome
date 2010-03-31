@@ -25,7 +25,7 @@ my %WriteMakefileArgs = (
                                            },
                        'ABSTRACT' => 'A more awesome MakeMaker plugin for L<Dist::Zilla>',
                        'EXE_FILES' => [],
-                       'VERSION' => '0.02',
+                       'VERSION' => '0.03',
                        'PREREQ_PM' => {
                                         'Dist::Zilla::Role::TextTemplate' => '0',
                                         'MooseX::Types::Moose' => '0',
@@ -35,11 +35,10 @@ my %WriteMakefileArgs = (
                                         'Dist::Zilla::Role::TestRunner' => '0',
                                         'Moose::Autobox' => '0',
                                         'Dist::Zilla::Role::InstallTool' => '0',
-                                        'Data::Dump' => '0',
                                         'Dist::Zilla::Plugin::MakeMaker' => '0',
                                         'List::MoreUtils' => '0',
-                                        'Dist::Zilla::Role::FixedPrereqs' => '0',
-                                        'Moose' => '0'
+                                        'Moose' => '0',
+                                        'Dist::Zilla::Role::FixedPrereqs' => '0'
                                       },
                        'LICENSE' => 'perl'
                      );

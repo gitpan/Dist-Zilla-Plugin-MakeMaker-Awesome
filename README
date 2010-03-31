@@ -69,6 +69,37 @@ DESCRIPTION
     
         __PACKAGE__->meta->make_immutable;
 
+    And another example from re::engine::Plan9:
+
+        package inc::Plan9MakeMaker;
+        use Moose;
+    
+        extends 'Dist::Zilla::Plugin::MakeMaker::Awesome';
+    
+        override _build_WriteMakefile_args => sub {
+            my ($self) = @_;
+    
+            our @DIR = qw(libutf libfmt libregexp);
+            our @OBJ = map { s/\.c$/.o/; $_ }
+                       grep { ! /test/ }
+                       glob "lib*/*.c";
+    
+            return +{
+                %{ super() },
+                DIR           => [ @DIR ],
+                INC           => join(' ', map { "-I$_" } @DIR),
+    
+                # This used to be '-shared lib*/*.o' but that doesn't work on Win32
+                LDDLFLAGS     => "-shared @OBJ",
+            };
+        };
+    
+        __PACKAGE__->meta->make_immutable;
+
+    If you have custom code in your Makefile.PL that Dist::Zilla can't
+    replace via its default facilities you'll be able replace it by using
+    this module.
+
 OVERRIDE
     These are the methods you can currently override in your custom inc/
     module. The work that this module does is entirely done in small modular
