@@ -1,0 +1,11 @@
+Revision history for Dist::Zilla::Plugin::MakeMaker::Awesome
+
+0.02 2010-03-31 14:20:26
+
+    - Added more awesome and renamed to
+      Dist::Zilla::Plugin::MakeMaker::Awesome from
+      Dist::Zilla::Plugin::OverridableMakeMaker.
+
+0.01 2010-03-13 07:40:07
+
+    - Initial CPAN release

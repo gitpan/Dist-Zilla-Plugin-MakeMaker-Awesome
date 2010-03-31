@@ -1,0 +1,38 @@
+---
+abstract: 'A more awesome MakeMaker plugin for L<Dist::Zilla>'
+author:
+  - 'Ævar Arnfjörð Bjarmason <avar@cpan.org>'
+build_requires:
+  File::Find: 0
+  File::Temp: 0
+  Test::More: 0
+configure_requires:
+  ExtUtils::MakeMaker: 6.31
+generated_by: 'Dist::Zilla version 2.100880'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Dist-Zilla-Plugin-MakeMaker-Awesome
+no_index: {}
+requires:
+  Data::Dump: 0
+  Dist::Zilla::File::InMemory: 0
+  Dist::Zilla::Plugin::MakeMaker: 0
+  Dist::Zilla::Role::BuildRunner: 0
+  Dist::Zilla::Role::FixedPrereqs: 0
+  Dist::Zilla::Role::InstallTool: 0
+  Dist::Zilla::Role::TestRunner: 0
+  Dist::Zilla::Role::TextTemplate: 0
+  List::MoreUtils: 0
+  Moose: 0
+  Moose::Autobox: 0
+  MooseX::Types::Moose: 0
+  namespace::autoclean: 0
+resources:
+  Ratings: http://cpanratings.perl.org/d/Dist-Zilla-Plugin-MakeMaker-Awesome
+  bugtracker: http://github.com/avar/dist-zilla-plugin-makemaker-awesome/issues
+  homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-MakeMaker-Awesome/
+  license: http://dev.perl.org/licenses/
+  repository: http://github.com/avar/dist-zilla-plugin-makemaker-awesome
+version: 0.02
