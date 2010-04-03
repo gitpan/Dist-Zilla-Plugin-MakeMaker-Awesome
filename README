@@ -11,7 +11,7 @@ DESCRIPTION
     This plugin is 100% compatable with Dist::Zilla::Plugin::MakeMaker, but
     if you need something more complex you can just subclass it:
 
-    Simple use, in your dist.ini:
+    Then, in your dist.ini:
 
         ;; Replace [MakeMaker]
         ;[MakeMaker]
@@ -23,7 +23,8 @@ DESCRIPTION
 
         [=inc::MyDistMakeMaker / MyDistMakeMaker]
 
-    Then in your inc/MyDistMakeMaker.pm, real example from Hailo:
+    Then in your inc/MyDistMakeMaker.pm, real example from Hailo (which has
+    "[=inc::HailoMakeMaker / HailoMakeMaker]" in its dist.ini):
 
         package inc::HailoMakeMaker;
         use Moose;
@@ -96,9 +97,13 @@ DESCRIPTION
     
         __PACKAGE__->meta->make_immutable;
 
-    If you have custom code in your Makefile.PL that Dist::Zilla can't
-    replace via its default facilities you'll be able replace it by using
-    this module.
+    If you have custom code in your ExtUtils::MakeMaker-based Makefile.PL
+    that Dist::Zilla can't replace via its default facilities you'll be able
+    replace it by using this module.
+
+    Even if your Makefile.PL isn't ExtUtils::MakeMaker-based you should be
+    able to override it. You'll just have to provide a new
+    "_build_MakeFile_PL_template".
 
 OVERRIDE
     These are the methods you can currently override in your custom inc/

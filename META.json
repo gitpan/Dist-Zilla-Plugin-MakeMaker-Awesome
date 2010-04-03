@@ -41,6 +41,6 @@
       "license" : "http://dev.perl.org/licenses/",
       "repository" : "http://github.com/avar/dist-zilla-plugin-makemaker-awesome"
    },
-   "version" : "0.03"
+   "version" : "0.04"
 }
 

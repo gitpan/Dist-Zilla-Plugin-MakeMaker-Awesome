@@ -25,7 +25,7 @@ my %WriteMakefileArgs = (
                                            },
                        'ABSTRACT' => 'A more awesome MakeMaker plugin for L<Dist::Zilla>',
                        'EXE_FILES' => [],
-                       'VERSION' => '0.03',
+                       'VERSION' => '0.04',
                        'PREREQ_PM' => {
                                         'Dist::Zilla::Role::TextTemplate' => '0',
                                         'MooseX::Types::Moose' => '0',
