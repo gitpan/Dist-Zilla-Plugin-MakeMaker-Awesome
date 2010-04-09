@@ -8,7 +8,7 @@ build_requires:
   Test::More: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.31
-generated_by: 'Dist::Zilla version 2.100900'
+generated_by: 'Dist::Zilla version 2.100960'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -20,8 +20,8 @@ requires:
   Dist::Zilla::File::InMemory: 0
   Dist::Zilla::Plugin::MakeMaker: 0
   Dist::Zilla::Role::BuildRunner: 0
-  Dist::Zilla::Role::FixedPrereqs: 0
   Dist::Zilla::Role::InstallTool: 0
+  Dist::Zilla::Role::PrereqSource: 0
   Dist::Zilla::Role::TestRunner: 0
   Dist::Zilla::Role::TextTemplate: 0
   List::MoreUtils: 0
@@ -35,4 +35,4 @@ resources:
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-MakeMaker-Awesome/
   license: http://dev.perl.org/licenses/
   repository: http://github.com/avar/dist-zilla-plugin-makemaker-awesome
-version: 0.04
+version: 0.05

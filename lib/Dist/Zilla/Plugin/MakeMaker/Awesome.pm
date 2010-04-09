@@ -1,6 +1,6 @@
 package Dist::Zilla::Plugin::MakeMaker::Awesome;
 BEGIN {
-  $Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.04';
+  $Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.05';
 }
 
 use Moose;
@@ -10,13 +10,13 @@ use List::MoreUtils qw(any uniq);
 use Dist::Zilla::File::InMemory;
 use namespace::autoclean;
 
+extends 'Dist::Zilla::Plugin::MakeMaker';
+
 with 'Dist::Zilla::Role::BuildRunner';
-with 'Dist::Zilla::Role::FixedPrereqs';
+with 'Dist::Zilla::Role::PrereqSource';
 with 'Dist::Zilla::Role::InstallTool';
 with 'Dist::Zilla::Role::TestRunner';
 with 'Dist::Zilla::Role::TextTemplate';
-
-extends 'Dist::Zilla::Plugin::MakeMaker';
 
 has MakeFile_PL_template => (
     is            => 'ro',
@@ -225,20 +225,18 @@ sub _build_share_dir_block {
     return \@share_dir_block;
 }
 
-sub prereq {
+sub register_prereqs {
     my ($self) = @_;
 
     $self->zilla->register_prereqs(
-        {
-            phase => 'configure' },
+        { phase => 'configure' },
         'ExtUtils::MakeMaker' => $self->eumm_version,
     );
 
     return {} unless uniq map {; $_->share->flatten } $self->dir_plugins;
 
     $self->zilla->register_prereqs(
-        {
-            phase => 'configure' },
+        { phase => 'configure' },
         'File::ShareDir::Install' => 0.03,
     );
 
@@ -247,12 +245,6 @@ sub prereq {
 
 sub setup_installer {
     my ($self, $arg) = @_;
-
-    my $chainload = 'Makefile.PL.PL';
-    if (-f $chainload) {
-        do $chainload;
-        return;
-    }
 
     ## Sanity checks
     confess "can't install files with whitespace in their names"
@@ -283,27 +275,6 @@ sub setup_installer {
     $self->add_file($file);
     return;
 }
-
-sub build {
-  my $self = shift;
-  system($^X => 'Makefile.PL') and die "error with Makefile.PL\n";
-  system('make')               and die "error running make\n";
-  return;
-}
-
-sub test {
-  my ( $self, $target ) = @_;
-  ## no critic Punctuation
-  $self->build;
-  system('make test') and die "error running make test\n";
-  return;
-}
-
-has 'eumm_version' => (
-  isa => 'Str',
-  is  => 'rw',
-  default => '6.11',
-);
 
 __PACKAGE__->meta->make_immutable;
 
