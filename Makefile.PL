@@ -25,7 +25,7 @@ my %WriteMakefileArgs = (
                                            },
                        'ABSTRACT' => 'A more awesome MakeMaker plugin for L<Dist::Zilla>',
                        'EXE_FILES' => [],
-                       'VERSION' => '0.05',
+                       'VERSION' => '0.06',
                        'PREREQ_PM' => {
                                         'Dist::Zilla::Role::TextTemplate' => '0',
                                         'MooseX::Types::Moose' => '0',
@@ -44,8 +44,18 @@ my %WriteMakefileArgs = (
                      );
 
 
-delete $WriteMakefileArgs{BUILD_REQUIRES}
-  unless eval { ExtUtils::MakeMaker->VERSION(6.56) };
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
+  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
+  my $pp = $WriteMakefileArgs{PREREQ_PM}; 
+  for my $mod ( keys %$br ) {
+    if ( exists $pp->{$mod} ) {
+      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod}; 
+    }
+    else {
+      $pp->{$mod} = $br->{$mod};
+    }
+  }
+}
 
 delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
   unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
