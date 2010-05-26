@@ -3,6 +3,7 @@ LICENSE
 MANIFEST
 META.json
 META.yml
+Makefile.PL
 README
 dist.ini
 lib/Dist/Zilla/Plugin/MakeMaker/Awesome.pm

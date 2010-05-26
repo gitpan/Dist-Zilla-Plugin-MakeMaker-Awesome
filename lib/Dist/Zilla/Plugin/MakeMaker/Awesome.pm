@@ -1,6 +1,6 @@
 package Dist::Zilla::Plugin::MakeMaker::Awesome;
 BEGIN {
-  $Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.06';
+  $Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.07';
 }
 
 use Moose;
@@ -9,6 +9,7 @@ use Moose::Autobox;
 use List::MoreUtils qw(any uniq);
 use Dist::Zilla::File::InMemory;
 use namespace::autoclean;
+use Dist::Zilla::Plugin::MakeMaker 3.101450;
 
 extends 'Dist::Zilla::Plugin::MakeMaker';
 
@@ -74,8 +75,22 @@ sub _build_WriteMakefile_args {
     (my $name = $self->zilla->name) =~ s/-/::/g;
     my $test_dirs = $self->test_dirs;
 
-    my $meta_prereq = $self->zilla->prereq->as_distmeta;
-    my $perl_prereq = delete $meta_prereq->{requires}{perl};
+    my $prereqs = $self->zilla->prereqs;
+    my $perl_prereq = $prereqs->requirements_for(qw(runtime requires))
+    ->as_string_hash->{perl};
+
+    my $prereqs_dump = sub {
+        $prereqs->requirements_for(@_)
+        ->clone
+        ->clear_requirement('perl')
+        ->as_string_hash;
+    };
+
+    my $build_prereq
+        = $prereqs->requirements_for(qw(build requires))
+        ->clone
+        ->add_requirements($prereqs->requirements_for(qw(test requires)))
+        ->as_string_hash;
 
     my %WriteMakefile = (
         DISTNAME  => $self->zilla->name,
@@ -86,9 +101,9 @@ sub _build_WriteMakefile_args {
         LICENSE   => $self->zilla->license->meta_yml_name,
         EXE_FILES => [ $self->exe_files ],
 
-        CONFIGURE_REQUIRES => delete $meta_prereq->{configure_requires},
-        BUILD_REQUIRES     => delete $meta_prereq->{build_requires},
-        PREREQ_PM          => delete $meta_prereq->{requires},
+        CONFIGURE_REQUIRES => $prereqs_dump->(qw(configure requires)),
+        BUILD_REQUIRES     => $build_prereq,
+        PREREQ_PM          => $prereqs_dump->(qw(runtime   requires)),
 
         test => { TESTS => join q{ }, sort keys %$test_dirs },
     );
@@ -271,7 +286,8 @@ sub setup_installer {
     my @share_dir_block = $self->share_dir_block;
 
     my $makefile_dump = $self->WriteMakefile_dump;
-    my $perl_prereq = $self->zilla->prereq->as_distmeta->{requires}{perl};
+    my $perl_prereq = $self->zilla->prereqs->requirements_for(qw(runtime requires))
+        ->as_string_hash->{perl};
     my $content = $self->fill_in_string(
         $self->MakeFile_PL_template,
         {
