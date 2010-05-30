@@ -4,7 +4,7 @@
       "\u00c3\u0086var Arnfj\u00c3\u00b6r\u00c3\u00b0 Bjarmason <avar@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 3.101450",
+   "generated_by" : "Dist::Zilla version 3.101461",
    "license" : "perl_5",
    "meta-spec" : {
       "url" : "http://github.com/dagolden/cpan-meta/",
@@ -45,14 +45,18 @@
    "resources" : {
       "Ratings" : "http://cpanratings.perl.org/d/Dist-Zilla-Plugin-MakeMaker-Awesome",
       "bugtracker" : {
-         "web" : "http://github.com/avar/dist-zilla-plugin-makemaker-awesome/issues"
+         "mailto" : "bug-Dist-Zilla-Plugin-MakeMaker-Awesome@rt.cpan.org",
+         "url" : "https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-MakeMaker-Awesome"
       },
       "homepage" : "http://search.cpan.org/dist/Dist-Zilla-Plugin-MakeMaker-Awesome/",
       "license" : "http://dev.perl.org/licenses/",
       "repository" : {
-         "url" : "http://github.com/avar/dist-zilla-plugin-makemaker-awesome"
+         "type" : "git",
+         "url" : "git://github.com/avar/dist-zilla-plugin-makemaker-awesome.git",
+         "web" : "http://github.com/avar/dist-zilla-plugin-makemaker-awesome"
       }
    },
-   "version" : "0.07"
+   "version" : "0.08",
+   "x_authority" : "cpan:AVAR"
 }
 

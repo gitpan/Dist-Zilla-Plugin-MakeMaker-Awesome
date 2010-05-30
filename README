@@ -124,15 +124,9 @@ OVERRIDE
     "_build_MakeFile_PL_template".
 
   test_dirs
-  bin_dirs
-  share_dirs
   exe_files
     The test/bin/share dirs and exe_files. These'll all be passed to
     /"_build_WriteMakefile_args" later.
-
-  dir_plugins
-    Used for Dist::Zilla::Plugin::ShareDir support. Don't touch it if you
-    don't need some deep ShareDir magic.
 
   _build_share_dir_block
     An "ArrayRef[Str]" with two elements to be used by
