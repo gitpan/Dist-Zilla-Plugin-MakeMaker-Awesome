@@ -25,7 +25,7 @@ my %WriteMakefileArgs = (
   'NAME' => 'Dist::Zilla::Plugin::MakeMaker::Awesome',
   'PREREQ_PM' => {
     'Dist::Zilla::File::InMemory' => '0',
-    'Dist::Zilla::Plugin::MakeMaker' => '3.101450',
+    'Dist::Zilla::Plugin::MakeMaker' => '4.101830',
     'Dist::Zilla::Role::BuildRunner' => '0',
     'Dist::Zilla::Role::InstallTool' => '0',
     'Dist::Zilla::Role::PrereqSource' => '0',
@@ -37,7 +37,7 @@ my %WriteMakefileArgs = (
     'MooseX::Types::Moose' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '0.09',
+  'VERSION' => '0.10',
   'test' => {
     'TESTS' => 't/*.t'
   }

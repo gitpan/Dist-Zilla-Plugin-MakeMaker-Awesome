@@ -9,7 +9,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.31
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.101612, CPAN::Meta::Converter version 2.101670'
+generated_by: 'Dist::Zilla version 4.101830, CPAN::Meta::Converter version 2.101670'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -18,7 +18,7 @@ name: Dist-Zilla-Plugin-MakeMaker-Awesome
 no_index: {}
 requires:
   Dist::Zilla::File::InMemory: 0
-  Dist::Zilla::Plugin::MakeMaker: 3.101450
+  Dist::Zilla::Plugin::MakeMaker: 4.101830
   Dist::Zilla::Role::BuildRunner: 0
   Dist::Zilla::Role::InstallTool: 0
   Dist::Zilla::Role::PrereqSource: 0
@@ -34,5 +34,5 @@ resources:
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-MakeMaker-Awesome/
   license: http://dev.perl.org/licenses/
   repository: git://github.com/avar/dist-zilla-plugin-makemaker-awesome.git
-version: 0.09
+version: 0.10
 x_authority: cpan:AVAR
