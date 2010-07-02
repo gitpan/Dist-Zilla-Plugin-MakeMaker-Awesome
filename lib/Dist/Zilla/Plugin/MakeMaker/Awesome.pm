@@ -3,7 +3,7 @@ BEGIN {
   $Dist::Zilla::Plugin::MakeMaker::Awesome::AUTHORITY = 'cpan:AVAR';
 }
 BEGIN {
-  $Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.08';
+  $Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.09';
 }
 
 use Moose;
@@ -407,6 +407,20 @@ C<package MY> section to install it. Deep magic.
 The main entry point is C<setup_installer> via the
 L<Dist::Zilla::Role::InstallTool> role. There are also other magic
 Dist::Zilla roles, check the source for more info.
+
+=head1 DIAGNOSTICS
+
+=over
+
+=item attempt to add Makefile.PL multiple times
+
+This error from L<Dist::Zilla> means that you've used both
+C<[MakeMaker]> and C<[MakeMaker::Awesome]>. You've either included
+C<MakeMaker> directly in F<dist.ini>, or you have plugin bundle that
+includes it. See L<@Filter|Dist::Zilla::PluginBundle::Filter> for how
+to filter it out.
+
+=back
 
 =head1 BUGS
 

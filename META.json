@@ -4,11 +4,13 @@
       "\u00c3\u0086var Arnfj\u00c3\u00b6r\u00c3\u00b0 Bjarmason <avar@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 3.101461",
-   "license" : "perl_5",
+   "generated_by" : "Dist::Zilla version 4.101612, CPAN::Meta::Converter version 2.101670",
+   "license" : [
+      "perl_5"
+   ],
    "meta-spec" : {
-      "url" : "http://github.com/dagolden/cpan-meta/",
-      "version" : 2
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
    },
    "name" : "Dist-Zilla-Plugin-MakeMaker-Awesome",
    "no_index" : {},
@@ -20,43 +22,45 @@
       },
       "runtime" : {
          "requires" : {
-            "Dist::Zilla::File::InMemory" : "0",
+            "Dist::Zilla::File::InMemory" : 0,
             "Dist::Zilla::Plugin::MakeMaker" : "3.101450",
-            "Dist::Zilla::Role::BuildRunner" : "0",
-            "Dist::Zilla::Role::InstallTool" : "0",
-            "Dist::Zilla::Role::PrereqSource" : "0",
-            "Dist::Zilla::Role::TestRunner" : "0",
-            "Dist::Zilla::Role::TextTemplate" : "0",
-            "List::MoreUtils" : "0",
-            "Moose" : "0",
-            "Moose::Autobox" : "0",
-            "MooseX::Types::Moose" : "0",
-            "namespace::autoclean" : "0"
+            "Dist::Zilla::Role::BuildRunner" : 0,
+            "Dist::Zilla::Role::InstallTool" : 0,
+            "Dist::Zilla::Role::PrereqSource" : 0,
+            "Dist::Zilla::Role::TestRunner" : 0,
+            "Dist::Zilla::Role::TextTemplate" : 0,
+            "List::MoreUtils" : 0,
+            "Moose" : 0,
+            "Moose::Autobox" : 0,
+            "MooseX::Types::Moose" : 0,
+            "namespace::autoclean" : 0
          }
       },
       "test" : {
          "requires" : {
-            "File::Find" : "0",
-            "File::Temp" : "0",
-            "Test::More" : "0"
+            "File::Find" : 0,
+            "File::Temp" : 0,
+            "Test::More" : 0
          }
       }
    },
+   "release_status" : "stable",
    "resources" : {
-      "Ratings" : "http://cpanratings.perl.org/d/Dist-Zilla-Plugin-MakeMaker-Awesome",
       "bugtracker" : {
          "mailto" : "bug-Dist-Zilla-Plugin-MakeMaker-Awesome@rt.cpan.org",
-         "url" : "https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-MakeMaker-Awesome"
+         "web" : "https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-MakeMaker-Awesome"
       },
       "homepage" : "http://search.cpan.org/dist/Dist-Zilla-Plugin-MakeMaker-Awesome/",
-      "license" : "http://dev.perl.org/licenses/",
+      "license" : [
+         "http://dev.perl.org/licenses/"
+      ],
       "repository" : {
          "type" : "git",
          "url" : "git://github.com/avar/dist-zilla-plugin-makemaker-awesome.git",
          "web" : "http://github.com/avar/dist-zilla-plugin-makemaker-awesome"
       }
    },
-   "version" : "0.08",
+   "version" : "0.09",
    "x_authority" : "cpan:AVAR"
 }
 

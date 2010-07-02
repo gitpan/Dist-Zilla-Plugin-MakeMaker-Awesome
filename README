@@ -139,6 +139,13 @@ OVERRIDE
     Dist::Zilla::Role::InstallTool role. There are also other magic
     Dist::Zilla roles, check the source for more info.
 
+DIAGNOSTICS
+    attempt to add Makefile.PL multiple times
+        This error from Dist::Zilla means that you've used both
+        "[MakeMaker]" and "[MakeMaker::Awesome]". You've either included
+        "MakeMaker" directly in dist.ini, or you have plugin bundle that
+        includes it. See @Filter for how to filter it out.
+
 BUGS
     This plugin would suck less if Dist::Zilla didn't use a INI-based config
     system so you could add a stuff like this in your main configuration
