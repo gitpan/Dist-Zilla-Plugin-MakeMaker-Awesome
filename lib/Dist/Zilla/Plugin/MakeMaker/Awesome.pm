@@ -3,7 +3,7 @@ BEGIN {
   $Dist::Zilla::Plugin::MakeMaker::Awesome::AUTHORITY = 'cpan:AVAR';
 }
 BEGIN {
-  $Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.10';
+  $Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.11';
 }
 
 use Moose;
@@ -43,7 +43,7 @@ my {{ $WriteMakefileArgs }}
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
   my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
-  my $pp = $WriteMakefileArgs{PREREQ_PM}; 
+  my $pp = $WriteMakefileArgs{PREREQ_PM};
   for my $mod ( keys %$br ) {
     if ( exists $pp->{$mod} ) {
       $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod}; 
