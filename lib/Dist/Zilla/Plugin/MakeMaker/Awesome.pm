@@ -1,9 +1,9 @@
 package Dist::Zilla::Plugin::MakeMaker::Awesome;
 BEGIN {
-  $Dist::Zilla::Plugin::MakeMaker::Awesome::AUTHORITY = 'cpan:AVAR';
+  $Dist::Zilla::Plugin::MakeMaker::Awesome::AUTHORITY = 'cpan:ETHER';
 }
-BEGIN {
-  $Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.12';
+{
+  $Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.13';
 }
 
 use Moose;
@@ -13,6 +13,7 @@ use List::MoreUtils qw(any uniq);
 use Dist::Zilla::File::InMemory;
 use namespace::autoclean;
 use Dist::Zilla::Plugin::MakeMaker 4.101830;
+use Data::Dumper;
 
 extends 'Dist::Zilla::Plugin::MakeMaker';
 

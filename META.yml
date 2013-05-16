@@ -6,10 +6,12 @@ build_requires:
   File::Find: 0
   File::Temp: 0
   Test::More: 0
+  strict: 0
+  warnings: 0
 configure_requires:
-  ExtUtils::MakeMaker: 6.31
+  ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.200000, CPAN::Meta::Converter version 2.102400'
+generated_by: 'Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.130880'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -17,6 +19,7 @@ meta-spec:
 name: Dist-Zilla-Plugin-MakeMaker-Awesome
 no_index: {}
 requires:
+  Data::Dumper: 0
   Dist::Zilla::File::InMemory: 0
   Dist::Zilla::Plugin::MakeMaker: 4.101830
   Dist::Zilla::Role::BuildRunner: 0
@@ -31,8 +34,8 @@ requires:
   namespace::autoclean: 0
 resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-MakeMaker-Awesome
-  homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-MakeMaker-Awesome/
+  homepage: http://metacpan.org/release/Dist-Zilla-Plugin-MakeMaker-Awesome
   license: http://dev.perl.org/licenses/
-  repository: git://github.com/avar/dist-zilla-plugin-makemaker-awesome.git
-version: 0.12
-x_authority: cpan:AVAR
+  repository: git://github.com/karenetheridge/dist-zilla-plugin-makemaker-awesome.git
+version: 0.13
+x_authority: cpan:ETHER
