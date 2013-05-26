@@ -8,7 +8,7 @@ DESCRIPTION
     MY" section or otherwise run custom code in your Makefile.PL you're out
     of luck.
 
-    This plugin is 100% compatable with Dist::Zilla::Plugin::MakeMaker, but
+    This plugin is 100% compatible with Dist::Zilla::Plugin::MakeMaker, but
     if you need something more complex you can just subclass it:
 
     Then, in your dist.ini:
@@ -28,29 +28,29 @@ DESCRIPTION
 
         package inc::HailoMakeMaker;
         use Moose;
-    
+
         extends 'Dist::Zilla::Plugin::MakeMaker::Awesome';
-    
+
         override _build_MakeFile_PL_template => sub {
             my ($self) = @_;
             my $template = super();
-    
+
             $template .= <<'TEMPLATE';
         package MY;
-    
+
         sub test {
             my $inherited = shift->SUPER::test(@_);
-    
+
             # Run tests with Moose and Mouse
             $inherited =~ s/^test_dynamic :: pure_all\n\t(.*?)\n/test_dynamic :: pure_all\n\tANY_MOOSE=Mouse $1\n\tANY_MOOSE=Moose $1\n/m;
-    
+
             return $inherited;
         }
         TEMPLATE
-    
+
             return $template;
         };
-    
+
         __PACKAGE__->meta->make_immutable;
 
     Or maybe you're writing an XS distro and want to pass custom arguments
@@ -59,42 +59,42 @@ DESCRIPTION
 
         package inc::PCREMakeMaker;
         use Moose;
-    
+
         extends 'Dist::Zilla::Plugin::MakeMaker::Awesome';
-    
+
         override _build_WriteMakefile_args => sub { +{
             # Add LIBS => to WriteMakefile() args
             %{ super() },
             LIBS => [ '-lpcre' ],
         } };
-    
+
         __PACKAGE__->meta->make_immutable;
 
     And another example from re::engine::Plan9:
 
         package inc::Plan9MakeMaker;
         use Moose;
-    
+
         extends 'Dist::Zilla::Plugin::MakeMaker::Awesome';
-    
+
         override _build_WriteMakefile_args => sub {
             my ($self) = @_;
-    
+
             our @DIR = qw(libutf libfmt libregexp);
             our @OBJ = map { s/\.c$/.o/; $_ }
                        grep { ! /test/ }
                        glob "lib*/*.c";
-    
+
             return +{
                 %{ super() },
                 DIR           => [ @DIR ],
                 INC           => join(' ', map { "-I$_" } @DIR),
-    
+
                 # This used to be '-shared lib*/*.o' but that doesn't work on Win32
                 LDDLFLAGS     => "-shared @OBJ",
             };
         };
-    
+
         __PACKAGE__->meta->make_immutable;
 
     If you have custom code in your ExtUtils::MakeMaker-based Makefile.PL
@@ -106,31 +106,31 @@ DESCRIPTION
     "_build_MakeFile_PL_template".
 
 OVERRIDE
-    These are the methods you can currently override in your custom inc/
-    module. The work that this module does is entirely done in small modular
-    methods that can be overriden in your subclass. Here are some of the
-    highlights:
+    These are the methods you can currently "override" or method-modify in
+    your custom inc/ module. The work that this module does is entirely done
+    in small modular methods that can be overridden in your subclass. Here
+    are some of the highlights:
 
   _build_MakeFile_PL_template
     Returns Text::Template string used to construct the Makefile.PL.
 
   _build_WriteMakefile_args
-    A "HashRef" of arguments that'll be passed to ExtUtils::MakeMaker's
+    A "HashRef" of arguments that will ll be passed to ExtUtils::MakeMaker's
     "WriteMakefile" function.
 
   _build_WriteMakefile_dump
     Takes the return value of "_build_WriteMakefile_args" and constructs a
-    Str that'll be included in the Makefile.PL by
+    Str that will be included in the Makefile.PL by
     "_build_MakeFile_PL_template".
 
   test_dirs
   exe_files
-    The test/bin/share dirs and exe_files. These'll all be passed to
+    The test/bin/share dirs and exe_files. These will all be passed to
     /"_build_WriteMakefile_args" later.
 
   _build_share_dir_block
     An "ArrayRef[Str]" with two elements to be used by
-    "_build_MakeFile_PL_template". The first will declare your ShareDir and
+    "_build_MakeFile_PL_template". The first will declare your sharedir and
     the second will add a magic "package MY" section to install it. Deep
     magic.
 

@@ -22,7 +22,7 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "Data::Dumper" => 0,
     "Dist::Zilla::File::InMemory" => 0,
-    "Dist::Zilla::Plugin::MakeMaker" => "4.101830",
+    "Dist::Zilla::Plugin::MakeMaker" => "4.300032",
     "Dist::Zilla::Role::BuildRunner" => 0,
     "Dist::Zilla::Role::InstallTool" => 0,
     "Dist::Zilla::Role::PrereqSource" => 0,
@@ -37,11 +37,14 @@ my %WriteMakefileArgs = (
   "TEST_REQUIRES" => {
     "File::Find" => 0,
     "File::Temp" => 0,
-    "Test::More" => 0,
+    "Test::CheckDeps" => "0.002",
+    "Test::DZil" => 0,
+    "Test::Deep" => 0,
+    "Test::More" => "0.94",
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.13",
+  "VERSION" => "0.14",
   "test" => {
     "TESTS" => "t/*.t"
   }
