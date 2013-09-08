@@ -1,11 +1,3 @@
-
-BEGIN {
-  unless ($ENV{RELEASE_TESTING}) {
-    require Test::More;
-    Test::More::plan(skip_all => 'these tests are for release candidate testing');
-  }
-}
-
 use strict;
 use warnings;
 use Test::More;
@@ -16,7 +8,7 @@ BEGIN { eval "use Test::Version; 1;" or die $@; }
 my @imports = ( 'version_all_ok' );
 
 my $params = {
-    is_strict   => 0,
+    is_strict   => 1,
     has_version => 1,
 };
 

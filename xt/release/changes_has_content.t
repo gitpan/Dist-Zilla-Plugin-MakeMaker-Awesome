@@ -1,18 +1,10 @@
 #!perl
 
-BEGIN {
-  unless ($ENV{RELEASE_TESTING}) {
-    require Test::More;
-    Test::More::plan(skip_all => 'these tests are for release candidate testing');
-  }
-}
-
-
 use Test::More tests => 2;
 
 note 'Checking Changes';
 my $changes_file = 'Changes';
-my $newver = '0.14';
+my $newver = '0.15';
 my $trial_token = '-TRIAL';
 
 SKIP: {
@@ -46,3 +38,4 @@ sub _get_changes
     # return number of non-blank lines
     return scalar @content;
 }
+
