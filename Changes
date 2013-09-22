@@ -1,5 +1,9 @@
 Revision history for Dist-Zilla-Plugin-MakeMaker-Awesome
 
+0.16      2013-09-22 19:48:15Z (Karen Etheridge)
+    - allow bootstrapping users of this module by using a default $VERSION if
+      the real one is not available
+
 0.15      2013-09-08 20:11:17Z (Karen Etheridge)
     - re-release with properly encoded META.yml
 
