@@ -5,13 +5,13 @@ LICENSE
 MANIFEST
 META.json
 META.yml
+Makefile.PL
 README
-corpus/dist/DZT/lib/DZT/Sample.pm
-corpus/dist/DZT/t/basic.t
 dist.ini
 lib/Dist/Zilla/Plugin/MakeMaker/Awesome.pm
 t/00-check-deps.t
 t/00-compile.t
+t/00-report-prereqs.t
 t/makemaker.t
 weaver.ini
 xt/author/pod-spell.t

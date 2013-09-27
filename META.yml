@@ -3,17 +3,21 @@ abstract: 'A more awesome MakeMaker plugin for L<Dist::Zilla>'
 author:
   - 'Ãvar ArnfjÃ¶rÃ° Bjarmason <avar@cpan.org>'
 build_requires:
+  ExtUtils::MakeMaker: 0
   File::Spec: 0
+  File::Spec::Functions: 0
   IO::Handle: 0
   IPC::Open3: 0
+  List::Util: 0
+  Path::Tiny: 0
   Test::CheckDeps: 0.007
   Test::DZil: 0
   Test::Deep: 0
   Test::More: 0.94
-  lib: 0
   strict: 0
   warnings: 0
 configure_requires:
+  ExtUtils::MakeMaker: 6.30
   Module::Build::Tiny: 0.027
 dynamic_config: 0
 generated_by: 'Dist::Zilla version 4.300039, CPAN::Meta::Converter version 2.132620'
@@ -30,7 +34,7 @@ no_index:
 provides:
   Dist::Zilla::Plugin::MakeMaker::Awesome:
     file: lib/Dist/Zilla/Plugin/MakeMaker/Awesome.pm
-    version: 0.16
+    version: 0.17
 requires:
   Data::Dumper: 0
   Dist::Zilla::File::InMemory: 0
@@ -45,11 +49,21 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-MakeMaker-Awesome
   homepage: https://github.com/avar/dist-zilla-plugin-makemaker-awesome
   repository: https://github.com/avar/dist-zilla-plugin-makemaker-awesome.git
-version: 0.16
+version: 0.17
 x_Dist_Zilla:
   perl:
-    version: 5.019003
+    version: 5.019004
   plugins:
+    -
+      class: Dist::Zilla::Plugin::Bootstrap::lib
+      config:
+        Dist::Zilla::Role::Bootstrap:
+          distname: Dist-Zilla-Plugin-MakeMaker-Awesome
+          fallback: 0
+          try_built: 1
+          try_built_method: mtime
+      name: Bootstrap::lib
+      version: 0.04000001
     -
       class: Dist::Zilla::Plugin::Git::NextVersion
       name: '@Author::ETHER/Git::NextVersion'
@@ -57,11 +71,11 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::PromptIfStale
       name: '@Author::ETHER/build'
-      version: 0.005
+      version: 0.006
     -
       class: Dist::Zilla::Plugin::PromptIfStale
       name: '@Author::ETHER/release'
-      version: 0.005
+      version: 0.006
     -
       class: Dist::Zilla::Plugin::ExecDir
       name: '@Author::ETHER/ExecDir'
@@ -112,7 +126,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Test::CheckDeps
       name: '@Author::ETHER/Test::CheckDeps'
-      version: 0.008
+      version: 0.009
     -
       class: Dist::Zilla::Plugin::Test::NoTabs
       config:
@@ -123,7 +137,7 @@ x_Dist_Zilla:
             - ':ExecFiles'
             - '@Author::ETHER/Examples'
       name: '@Author::ETHER/Test::NoTabs'
-      version: 0.02
+      version: 0.04
     -
       class: Dist::Zilla::Plugin::EOLTests
       name: '@Author::ETHER/EOLTests'
@@ -173,6 +187,10 @@ x_Dist_Zilla:
       name: '@Author::ETHER/Test::Kwalitee'
       version: 2.06
     -
+      class: Dist::Zilla::Plugin::Test::ReportPrereqs
+      name: '@Author::ETHER/Test::ReportPrereqs'
+      version: 0.006
+    -
       class: Dist::Zilla::Plugin::PruneCruft
       name: '@Author::ETHER/PruneCruft'
       version: 4.300039
@@ -190,8 +208,13 @@ x_Dist_Zilla:
       version: 4.300039
     -
       class: Dist::Zilla::Plugin::PodWeaver
+      config:
+        Dist::Zilla::Plugin::PodWeaver:
+          finder:
+            - ':InstallModules'
+            - ':ExecFiles'
       name: '@Author::ETHER/PodWeaver'
-      version: 3.101642
+      version: 3.102000
     -
       class: Dist::Zilla::Plugin::NextRelease
       name: '@Author::ETHER/NextRelease'
@@ -250,6 +273,10 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::ReadmeAnyFromPod
       name: '@Author::ETHER/ReadmeAnyFromPod'
       version: 0.131500
+    -
+      class: Dist::Zilla::Plugin::MakeMaker::Fallback
+      name: '@Author::ETHER/MakeMaker::Fallback'
+      version: 0.002
     -
       class: Dist::Zilla::Plugin::ModuleBuildTiny
       name: '@Author::ETHER/ModuleBuildTiny'
