@@ -1,4 +1,5 @@
 Build.PL
+CONTRIBUTING
 Changes
 INSTALL
 LICENSE
@@ -9,11 +10,10 @@ Makefile.PL
 README
 dist.ini
 lib/Dist/Zilla/Plugin/MakeMaker/Awesome.pm
-t/00-check-deps.t
-t/00-compile.t
 t/00-report-prereqs.t
 t/makemaker.t
 weaver.ini
+xt/author/00-compile.t
 xt/author/pod-spell.t
 xt/release/changes_has_content.t
 xt/release/cpan-changes.t
@@ -21,6 +21,7 @@ xt/release/distmeta.t
 xt/release/eol.t
 xt/release/kwalitee.t
 xt/release/minimum-version.t
+xt/release/mojibake.t
 xt/release/no-tabs.t
 xt/release/pod-coverage.t
 xt/release/pod-no404s.t

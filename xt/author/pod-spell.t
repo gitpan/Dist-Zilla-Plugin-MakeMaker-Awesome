@@ -10,8 +10,8 @@ use Pod::Wordlist;
 add_stopwords(<DATA>);
 all_pod_files_spelling_ok( qw( bin lib  ) );
 __DATA__
-var
-ArnfjÃ
+Ã†var
+ArnfjÃ¶rÃ°
 Bjarmason
 avar
 Jesse
@@ -21,10 +21,8 @@ Karen
 Etheridge
 ether
 Robin
-Smidsrød
+SmidsrÃ¸d
 robin
-Ævar
-Arnfjörğ
 lib
 Dist
 Zilla
