@@ -1,5 +1,10 @@
 Revision history for Dist-Zilla-Plugin-MakeMaker-Awesome
 
+0.19      2014-01-11 18:44:50Z
+    - also include the version of ourselves in generated headers
+    - synchronized prereqs are used as a fallback in Makefile.PL, as done in
+      [MakeMaker] v5.001
+
 0.18      2013-10-20 18:29:23Z (Karen Etheridge)
     - re-release with encoding fixes in metadata
 
