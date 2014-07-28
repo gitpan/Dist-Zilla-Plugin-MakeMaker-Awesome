@@ -1,19 +1,21 @@
 use strict;
 use warnings;
+
 use Test::More 0.88;
 use Test::Deep;
-
 use Test::DZil;
 use Path::Tiny;
+use Test::Fatal;
+use File::pushd 'pushd';
 
 {
   my $tzil = Builder->from_config(
     { dist_root => 'does_not_exist' },
     {
       add_files => {
-        'source/dist.ini' => simple_ini(
+        path(qw(source dist.ini)) => simple_ini(
           'GatherDir',
-          'MakeMaker',
+          'MakeMaker::Awesome',
           [ Prereqs => { 'Foo::Bar' => '1.20',      perl => '5.008' } ],
           [ Prereqs => BuildRequires => { 'Builder::Bob' => '9.901' } ],
           [ Prereqs => TestRequires  => { 'Test::Deet'   => '7',
@@ -21,13 +23,14 @@ use Path::Tiny;
         ),
         path(qw(source lib DZT Sample.pm)) => 'package DZT::Sample; 1',
         path(qw(source t basic.t)) => 'warn "here is a test";',
+        path(qw(source t more.t)) => 'warn "here is another test";',
       },
     },
   );
 
   $tzil->build;
 
-  my $makemaker = $tzil->plugin_named('MakeMaker');
+  my $makemaker = $tzil->plugin_named('MakeMaker::Awesome');
 
   my %want = (
     DISTNAME => 'DZT-Sample',
@@ -54,31 +57,27 @@ use Path::Tiny;
   );
 
   cmp_deeply(
-    $makemaker->__write_makefile_args,
+    { $makemaker->WriteMakefile_args },
     \%want,
     'correct makemaker args generated',
   );
-}
-
-{
-  my $tzil = Builder->from_config(
-    { dist_root => 'corpus/dist/DZT' },
-    {
-      add_files => {
-        'source/dist.ini' => simple_ini(
-          'GatherDir',
-          'MakeMaker',
-          [ Prereqs => { perl => '5.8.1' } ],
-        ),
-      },
-    },
-  );
-
-  $tzil->build;
 
   my $content = $tzil->slurp_file('build/Makefile.PL');
+  like(
+    $content,
+    qr/(?{ quotemeta($tzil->plugin_named('MakeMaker::Awesome')->_dump_as(\%want, '*WriteMakefileArgs')) })/,
+    'arguments are dumped to Makefile.PL',
+  );
 
-  like($content, qr/^use 5\.008001;\s*$/m, "normalized the perl version needed");
+  subtest 'run the generated Makefile.PL' => sub
+  {
+      my $wd = pushd path($tzil->tempdir)->child('build');
+      is(
+          exception { $makemaker->build },
+          undef,
+          'Makefile.PL can be run successfully',
+      );
+  };
 }
 
 done_testing;
