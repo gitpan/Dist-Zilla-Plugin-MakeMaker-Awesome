@@ -8,7 +8,7 @@ use warnings;
 
 BEGIN {
 my %configure_requires = (
-    'ExtUtils::MakeMaker' => '6.30',
+    'ExtUtils::MakeMaker' => '0',
     'Module::Build::Tiny' => '0.037',
 );
 
@@ -72,7 +72,7 @@ my %WriteMakefileArgs = (
   "AUTHOR" => "\x{c6}var Arnfj\x{f6}r\x{f0} Bjarmason <avar\@cpan.org>",
   "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
-    "ExtUtils::MakeMaker" => "6.30",
+    "ExtUtils::MakeMaker" => 0,
     "Module::Build::Tiny" => "0.037"
   },
   "DISTNAME" => "Dist-Zilla-Plugin-MakeMaker-Awesome",
@@ -107,7 +107,7 @@ my %WriteMakefileArgs = (
     "version" => "0.77",
     "warnings" => 0
   },
-  "VERSION" => "0.21",
+  "VERSION" => "0.22",
   "test" => {
     "TESTS" => "t/*.t"
   }

@@ -1,5 +1,10 @@
 Revision history for Dist-Zilla-Plugin-MakeMaker-Awesome
 
+0.22      2014-07-29 04:51:13Z
+    - fix for Dist::Zilla::Plugin::MakeMaker 5.020 dropping a default required
+      version for ExtUtils::MakeMaker
+    - now omitting BUILD_REQUIRES, TEST_REQUIRES in Makefile.PL when empty
+
 0.21      2014-07-28 04:00:35Z
     - *INCOMPATIBLE CHANGE*: the 'test_dirs' sub and '_build_test_dirs' method
       have been renamed to 'test_files' and '_build_test_files' respectively,

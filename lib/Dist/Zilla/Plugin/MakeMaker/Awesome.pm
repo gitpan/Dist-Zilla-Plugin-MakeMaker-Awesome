@@ -2,8 +2,8 @@ package Dist::Zilla::Plugin::MakeMaker::Awesome;
 BEGIN {
   $Dist::Zilla::Plugin::MakeMaker::Awesome::AUTHORITY = 'cpan:AVAR';
 }
-# git description: v0.20-21-gd1cc7e6
-$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.21';
+# git description: v0.21-4-g1c3dd98
+$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.22';
 # ABSTRACT: A more awesome MakeMaker plugin for L<Dist::Zilla>
 # KEYWORDS: plugin installer MakeMaker Makefile.PL toolchain customize override
 
@@ -49,7 +49,7 @@ use warnings;
 
 {{ $perl_prereq ? qq[use $perl_prereq;] : ''; }}
 
-use ExtUtils::MakeMaker {{ $eumm_version }};
+use ExtUtils::MakeMaker{{ defined $eumm_version ? ' ' . $eumm_version : '' }};
 
 {{ $share_dir_block[0] }}
 
@@ -119,17 +119,8 @@ sub _build_WriteMakefile_args {
         ->as_string_hash;
     };
 
-    my $build_prereq
-        = $prereqs->requirements_for(qw(build requires))
-        ->clone
-        ->clear_requirement('perl')
-        ->as_string_hash;
-
-    my $test_prereq
-        = $prereqs->requirements_for(qw(test requires))
-        ->clone
-        ->clear_requirement('perl')
-        ->as_string_hash;
+    my $build_prereq = $prereqs_dump->(qw(build requires));
+    my $test_prereq = $prereqs_dump->(qw(test requires));
 
     my %WriteMakefile = (
         DISTNAME  => $self->zilla->name,
@@ -141,8 +132,8 @@ sub _build_WriteMakefile_args {
         EXE_FILES => $self->exe_files,
 
         CONFIGURE_REQUIRES => $prereqs_dump->(qw(configure requires)),
-        BUILD_REQUIRES     => $build_prereq,
-        TEST_REQUIRES      => $test_prereq,
+        keys %$build_prereq ? ( BUILD_REQUIRES => $build_prereq ) : (),
+        keys %$test_prereq ? ( TEST_REQUIRES => $test_prereq ) : (),
         PREREQ_PM          => $prereqs_dump->(qw(runtime   requires)),
 
         test => { TESTS => join q{ }, sort @$test_files },
@@ -254,7 +245,7 @@ sub register_prereqs {
 
     $self->zilla->register_prereqs(
         { phase => 'configure' },
-        'ExtUtils::MakeMaker' => $self->eumm_version,
+        'ExtUtils::MakeMaker' => $self->eumm_version || 0,
     );
 
     return unless keys %{ $self->zilla->_share_dir_map };
@@ -313,7 +304,7 @@ Dist::Zilla::Plugin::MakeMaker::Awesome - A more awesome MakeMaker plugin for L<
 
 =head1 VERSION
 
-version 0.21
+version 0.22
 
 =head1 SYNOPSIS
 
