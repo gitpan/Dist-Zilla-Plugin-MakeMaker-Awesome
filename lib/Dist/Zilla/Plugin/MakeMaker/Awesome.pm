@@ -2,8 +2,8 @@ package Dist::Zilla::Plugin::MakeMaker::Awesome;
 BEGIN {
   $Dist::Zilla::Plugin::MakeMaker::Awesome::AUTHORITY = 'cpan:AVAR';
 }
-# git description: v0.21-4-g1c3dd98
-$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.22';
+# git description: v0.22-2-gc5b4870
+$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.23';
 # ABSTRACT: A more awesome MakeMaker plugin for L<Dist::Zilla>
 # KEYWORDS: plugin installer MakeMaker Makefile.PL toolchain customize override
 
@@ -13,8 +13,11 @@ use MooseX::Types::Stringlike 'Stringlike';
 use Moose::Autobox;
 use namespace::autoclean;
 use CPAN::Meta::Requirements 2.121; # requirements_for_module
+use List::Util 'first';
 
 extends 'Dist::Zilla::Plugin::MakeMaker' => { -version => 5.001 };
+# avoid wiping out the method modifications to dump_config done by superclass
+with 'Dist::Zilla::Role::FileGatherer' => { -excludes => 'dump_config' };
 
 sub mvp_multivalue_args { qw(WriteMakefile_arg_strs test_files exe_files) }
 
@@ -258,7 +261,22 @@ sub register_prereqs {
     return {};
 }
 
-sub setup_installer {
+sub gather_files
+{
+    my $self = shift;
+
+    require Dist::Zilla::File::InMemory;
+    my $file = Dist::Zilla::File::InMemory->new({
+        name    => 'Makefile.PL',
+        content => $self->MakeFile_PL_template,     # template evaluated later
+    });
+
+    $self->add_file($file);
+    return;
+}
+
+sub setup_installer
+{
     my $self = shift;
 
     ## Sanity checks
@@ -267,8 +285,12 @@ sub setup_installer {
 
     my $perl_prereq = $self->delete_WriteMakefile_arg('MIN_PERL_VERSION');
 
+    # file was already created; find it and fill in the content
+    my $file = first { $_->name eq 'Makefile.PL' } @{$self->zilla->files};
+    $self->log_debug([ 'updating contents of Makefile.PL in memory' ]);
+
     my $content = $self->fill_in_string(
-        $self->MakeFile_PL_template,
+        $file->content,
         {
             dist              => \($self->zilla),
             plugin            => \$self,
@@ -280,13 +302,7 @@ sub setup_installer {
             extra_args        => \($self->WriteMakefile_arg_strs),
         },
     );
-
-    my $file = Dist::Zilla::File::InMemory->new({
-        name    => 'Makefile.PL',
-        content => $content,
-    });
-
-    $self->add_file($file);
+    $file->content($content);
     return;
 }
 
@@ -304,7 +320,7 @@ Dist::Zilla::Plugin::MakeMaker::Awesome - A more awesome MakeMaker plugin for L<
 
 =head1 VERSION
 
-version 0.22
+version 0.23
 
 =head1 SYNOPSIS
 
@@ -522,6 +538,8 @@ L<ExtUtils::MakeMaker/WriteMakefile>.
 Defaults to using data from C<:ExecDir> plugins.
 
 =head3 register_prereqs
+
+=head3 gather_files
 
 =head3 setup_installer
 

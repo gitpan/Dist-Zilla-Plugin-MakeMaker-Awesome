@@ -53,8 +53,11 @@ do { my $x = {
        'runtime' => {
                       'requires' => {
                                       'CPAN::Meta::Requirements' => '2.121',
+                                      'Dist::Zilla::File::InMemory' => '0',
                                       'Dist::Zilla::Plugin::MakeMaker' => '5.001',
                                       'Dist::Zilla::Plugin::MetaResources' => '4.300039',
+                                      'Dist::Zilla::Role::FileGatherer' => '0',
+                                      'List::Util' => '0',
                                       'Moose' => '0',
                                       'Moose::Autobox' => '0',
                                       'MooseX::Types::Moose' => '0',
@@ -65,9 +68,7 @@ do { my $x = {
                     },
        'test' => {
                    'recommends' => {
-                                     'CPAN::Meta' => '0',
-                                     'CPAN::Meta::Prereqs' => '0',
-                                     'CPAN::Meta::Requirements' => '2.120900'
+                                     'CPAN::Meta' => '2.120900'
                                    },
                    'requires' => {
                                    'ExtUtils::MakeMaker' => '0',
@@ -84,7 +85,6 @@ do { my $x = {
                                    'Test::More' => '0.88',
                                    'if' => '0',
                                    'strict' => '0',
-                                   'version' => '0.77',
                                    'warnings' => '0'
                                  }
                  }

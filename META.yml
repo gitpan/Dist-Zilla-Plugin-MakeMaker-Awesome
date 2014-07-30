@@ -17,7 +17,6 @@ build_requires:
   Test::More: '0.88'
   if: '0'
   strict: '0'
-  version: '0.77'
   warnings: '0'
 configure_requires:
   ExtUtils::MakeMaker: '0'
@@ -45,11 +44,14 @@ no_index:
 provides:
   Dist::Zilla::Plugin::MakeMaker::Awesome:
     file: lib/Dist/Zilla/Plugin/MakeMaker/Awesome.pm
-    version: '0.22'
+    version: '0.23'
 requires:
   CPAN::Meta::Requirements: '2.121'
+  Dist::Zilla::File::InMemory: '0'
   Dist::Zilla::Plugin::MakeMaker: '5.001'
   Dist::Zilla::Plugin::MetaResources: '4.300039'
+  Dist::Zilla::Role::FileGatherer: '0'
+  List::Util: '0'
   Moose: '0'
   Moose::Autobox: '0'
   MooseX::Types::Moose: '0'
@@ -62,7 +64,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-MakeMaker-Awesome
   homepage: https://github.com/avar/dist-zilla-plugin-makemaker-awesome
   repository: https://github.com/avar/dist-zilla-plugin-makemaker-awesome.git
-version: '0.22'
+version: '0.23'
 x_Dist_Zilla:
   perl:
     version: '5.021001'
@@ -238,7 +240,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Test::ReportPrereqs
       name: '@Author::ETHER/Test::ReportPrereqs'
-      version: '0.014'
+      version: '0.016'
     -
       class: Dist::Zilla::Plugin::Test::Portability
       name: '@Author::ETHER/Test::Portability'
@@ -538,7 +540,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: v0.22
+          tag: v0.23
           tag_format: v%v%t
           tag_message: v%v%t
           time_zone: local

@@ -64,15 +64,18 @@ EOW
         "\x{c6}var Arnfj\x{f6}r\x{f0} Bjarmason <avar\@cpan.org>"
       ],
       "dist_name" => "Dist-Zilla-Plugin-MakeMaker-Awesome",
-      "dist_version" => "0.22",
+      "dist_version" => "0.23",
       "license" => "perl",
       "module_name" => "Dist::Zilla::Plugin::MakeMaker::Awesome",
       "recommends" => {},
       "recursive_test_files" => 1,
       "requires" => {
         "CPAN::Meta::Requirements" => "2.121",
+        "Dist::Zilla::File::InMemory" => 0,
         "Dist::Zilla::Plugin::MakeMaker" => "5.001",
         "Dist::Zilla::Plugin::MetaResources" => "4.300039",
+        "Dist::Zilla::Role::FileGatherer" => 0,
+        "List::Util" => 0,
         "Moose" => 0,
         "Moose::Autobox" => 0,
         "MooseX::Types::Moose" => 0,
@@ -96,7 +99,6 @@ EOW
         "Test::More" => "0.88",
         "if" => 0,
         "strict" => 0,
-        "version" => "0.77",
         "warnings" => 0
       }
     );
@@ -117,7 +119,6 @@ EOW
       "Test::More" => "0.88",
       "if" => 0,
       "strict" => 0,
-      "version" => "0.77",
       "warnings" => 0
     );
 
