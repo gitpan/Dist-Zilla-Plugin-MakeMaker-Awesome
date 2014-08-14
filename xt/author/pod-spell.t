@@ -14,12 +14,12 @@ __DATA__
 Arnfjörð
 Bjarmason
 avar
-Jesse
-Luehrs
-doy
 Karen
 Etheridge
 ether
+Jesse
+Luehrs
+doy
 Robin
 Smidsrød
 robin

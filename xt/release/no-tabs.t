@@ -15,6 +15,7 @@ my @files = (
     't/03-dump-config.t',
     't/04-overrides.t',
     't/05-simple-configs.t',
+    't/zzz-check-breaks.t',
     'xt/author/00-compile.t',
     'xt/author/pod-spell.t',
     'xt/release/changes_has_content.t',

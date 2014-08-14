@@ -3,16 +3,14 @@ abstract: 'A more awesome MakeMaker plugin for L<Dist::Zilla>'
 author:
   - 'Ævar Arnfjörð Bjarmason <avar@cpan.org>'
 build_requires:
+  CPAN::Meta::Check: '0.007'
+  CPAN::Meta::Requirements: '2.121'
   ExtUtils::MakeMaker: '0'
   File::Spec: '0'
-  File::Spec::Functions: '0'
   File::pushd: '0'
-  List::Util: '0'
   Path::Tiny: '0'
-  Scalar::Util: '0'
   Test::DZil: '0'
   Test::Deep: '0'
-  Test::Deep::JSON: '0'
   Test::Fatal: '0'
   Test::More: '0.88'
   if: '0'
@@ -44,7 +42,7 @@ no_index:
 provides:
   Dist::Zilla::Plugin::MakeMaker::Awesome:
     file: lib/Dist/Zilla/Plugin/MakeMaker/Awesome.pm
-    version: '0.23'
+    version: '0.24'
 requires:
   CPAN::Meta::Requirements: '2.121'
   Dist::Zilla::File::InMemory: '0'
@@ -64,10 +62,10 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-MakeMaker-Awesome
   homepage: https://github.com/avar/dist-zilla-plugin-makemaker-awesome
   repository: https://github.com/avar/dist-zilla-plugin-makemaker-awesome.git
-version: '0.23'
+version: '0.24'
 x_Dist_Zilla:
   perl:
-    version: '5.021001'
+    version: '5.021002'
   plugins:
     -
       class: Dist::Zilla::Plugin::Bootstrap::lib
@@ -78,7 +76,7 @@ x_Dist_Zilla:
           try_built: '1'
           try_built_method: mtime
       name: Bootstrap::lib
-      version: '1.000003'
+      version: '1.000004'
     -
       class: Dist::Zilla::Plugin::Git::NextVersion
       config:
@@ -173,14 +171,20 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::Test::Compile
       config:
         Dist::Zilla::Plugin::Test::Compile:
+          bail_out_on_fail: '1'
+          fail_on_warning: author
+          fake_home: '0'
           filename: xt/author/00-compile.t
           module_finder:
             - ':InstallModules'
+          needs_display: '0'
+          phase: develop
           script_finder:
             - ':ExecFiles'
             - '@Author::ETHER/Examples'
+          skips: []
       name: '@Author::ETHER/Test::Compile'
-      version: '2.043'
+      version: '2.045'
     -
       class: Dist::Zilla::Plugin::Test::NoTabs
       config:
@@ -240,7 +244,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Test::ReportPrereqs
       name: '@Author::ETHER/Test::ReportPrereqs'
-      version: '0.016'
+      version: '0.019'
     -
       class: Dist::Zilla::Plugin::Test::Portability
       name: '@Author::ETHER/Test::Portability'
@@ -336,7 +340,7 @@ x_Dist_Zilla:
             -
               class: Pod::Weaver::Section::Contributors
               name: Contributors
-              version: '0.007'
+              version: '0.008'
       name: '@Author::ETHER/PodWeaver'
       version: '4.005'
     -
@@ -346,7 +350,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::ReadmeAnyFromPod
       name: '@Author::ETHER/ReadmeAnyFromPod'
-      version: '0.141760'
+      version: '0.142250'
     -
       class: Dist::Zilla::Plugin::GithubMeta
       name: '@Author::ETHER/GithubMeta'
@@ -385,6 +389,15 @@ x_Dist_Zilla:
       name: '@Author::ETHER/Keywords'
       version: '0.005'
     -
+      class: Dist::Zilla::Plugin::Git::Contributors
+      config:
+        Dist::Zilla::Plugin::Git::Contributors:
+          include_authors: '0'
+          include_releaser: '1'
+          order_by: commits
+      name: '@Author::ETHER/Git::Contributors'
+      version: '0.005'
+    -
       class: Dist::Zilla::Plugin::AutoPrereqs
       name: '@Author::ETHER/AutoPrereqs'
       version: '5.020'
@@ -410,7 +423,7 @@ x_Dist_Zilla:
         Dist::Zilla::Role::TestRunner:
           default_jobs: 9
       name: '@Author::ETHER/MakeMaker::Fallback'
-      version: '0.010'
+      version: '0.012'
     -
       class: Dist::Zilla::Plugin::ModuleBuildTiny::Fallback
       config:
@@ -439,8 +452,12 @@ x_Dist_Zilla:
       version: '0.007'
     -
       class: Dist::Zilla::Plugin::Run::AfterBuild
+      config:
+        Dist::Zilla::Plugin::Run::Role::Runner:
+          run:
+            - "bash -c \"if [[ `dirname %d` != .build ]]; then test -e .ackrc && grep -q -- '--ignore-dir=%d' .ackrc || echo '--ignore-dir=%d' >> .ackrc; fi; if [[ %d =~ ^%n-[.[:xdigit:]]+$ ]]; then rm -f .latest; ln -s %d .latest; fi\""
       name: '@Author::ETHER/Run::AfterBuild'
-      version: '0.022'
+      version: '0.023'
     -
       class: Dist::Zilla::Plugin::CheckStrictVersion
       name: '@Author::ETHER/CheckStrictVersion'
@@ -475,7 +492,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Git::Remote::Check
       name: '@Author::ETHER/Git::Remote::Check'
-      version: 0.2.0
+      version: 0.1.2
     -
       class: Dist::Zilla::Plugin::CheckPrereqsIndexed
       name: '@Author::ETHER/CheckPrereqsIndexed'
@@ -511,8 +528,12 @@ x_Dist_Zilla:
       version: '0.001'
     -
       class: Dist::Zilla::Plugin::Run::AfterRelease
-      name: '@Author::ETHER/Run::AfterRelease'
-      version: '0.022'
+      config:
+        Dist::Zilla::Plugin::Run::Role::Runner:
+          run:
+            - 'rm -f README.md'
+      name: '@Author::ETHER/remove old READMEs'
+      version: '0.023'
     -
       class: Dist::Zilla::Plugin::Git::Commit
       config:
@@ -540,7 +561,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: v0.23
+          tag: v0.24
           tag_format: v%v%t
           tag_message: v%v%t
           time_zone: local
@@ -564,9 +585,12 @@ x_Dist_Zilla:
       name: '@Author::ETHER/Git::Push'
       version: '2.023'
     -
-      class: Dist::Zilla::Plugin::InstallRelease
-      name: '@Author::ETHER/InstallRelease'
-      version: '0.008'
+      class: Dist::Zilla::Plugin::Run::AfterRelease
+      config:
+        Dist::Zilla::Plugin::Run::Role::Runner:
+          run: REDACTED
+      name: '@Author::ETHER/install release'
+      version: '0.023'
     -
       class: Dist::Zilla::Plugin::ConfirmRelease
       name: '@Author::ETHER/ConfirmRelease'
@@ -600,9 +624,13 @@ x_Dist_Zilla:
       name: Test::CleanNamespaces
       version: '0.004'
     -
-      class: Dist::Zilla::Plugin::ContributorsFromGit
-      name: ContributorsFromGit
-      version: '0.014'
+      class: Dist::Zilla::Plugin::Breaks
+      name: Breaks
+      version: '0.002'
+    -
+      class: Dist::Zilla::Plugin::Test::CheckBreaks
+      name: Test::CheckBreaks
+      version: '0.009'
     -
       class: Dist::Zilla::Plugin::MetaResources
       name: additional
@@ -649,8 +677,10 @@ x_Dist_Zilla:
       is_trial: '0'
     version: '5.020'
 x_authority: cpan:AVAR
+x_breaks:
+  Dist::Zilla::Plugin::MakeMaker::Fallback: '<= 0.011'
 x_contributors:
-  - 'Jesse Luehrs <doy@tozt.net>'
   - 'Karen Etheridge <ether@cpan.org>'
+  - 'Jesse Luehrs <doy@tozt.net>'
   - 'Robin Smidsrød <robin@smidsrod.no>'
   - 'Vladimir Timofeev <vovkasm@gmail.com>'

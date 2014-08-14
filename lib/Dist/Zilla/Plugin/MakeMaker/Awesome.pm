@@ -2,8 +2,8 @@ package Dist::Zilla::Plugin::MakeMaker::Awesome;
 BEGIN {
   $Dist::Zilla::Plugin::MakeMaker::Awesome::AUTHORITY = 'cpan:AVAR';
 }
-# git description: v0.22-2-gc5b4870
-$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.23';
+# git description: v0.23-6-gbf39861
+$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.24';
 # ABSTRACT: A more awesome MakeMaker plugin for L<Dist::Zilla>
 # KEYWORDS: plugin installer MakeMaker Makefile.PL toolchain customize override
 
@@ -279,6 +279,8 @@ sub setup_installer
 {
     my $self = shift;
 
+    $self->log_debug('setup_installer');
+
     ## Sanity checks
     $self->log_fatal("can't install files with whitespace in their names")
         if grep { /\s/ } @{$self->exe_files};
@@ -320,7 +322,7 @@ Dist::Zilla::Plugin::MakeMaker::Awesome - A more awesome MakeMaker plugin for L<
 
 =head1 VERSION
 
-version 0.23
+version 0.24
 
 =head1 SYNOPSIS
 
@@ -602,15 +604,17 @@ the same terms as the Perl 5 programming language system itself.
 
 =head1 CONTRIBUTORS
 
+=for stopwords Karen Etheridge Jesse Luehrs Robin Smidsrød Vladimir Timofeev
+
 =over 4
 
 =item *
 
-Jesse Luehrs <doy@tozt.net>
+Karen Etheridge <ether@cpan.org>
 
 =item *
 
-Karen Etheridge <ether@cpan.org>
+Jesse Luehrs <doy@tozt.net>
 
 =item *
 
