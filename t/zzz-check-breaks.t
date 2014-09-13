@@ -1,9 +1,9 @@
 use strict;
 use warnings;
 
-# this test was generated with Dist::Zilla::Plugin::Test::CheckBreaks 0.009
+# this test was generated with Dist::Zilla::Plugin::Test::CheckBreaks 0.011
 
-use Test::More;
+use Test::More 0.88;
 
 SKIP: {
     eval 'require Moose::Conflicts; Moose::Conflicts->check_conflicts';
@@ -30,6 +30,5 @@ if (my @breaks = grep { defined $result->{$_} } keys %$result)
     diag "$result->{$_}" for sort @breaks;
     diag "\n", 'You should now update these modules!';
 }
-
 
 done_testing;
