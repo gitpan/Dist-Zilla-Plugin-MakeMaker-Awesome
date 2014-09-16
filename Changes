@@ -1,5 +1,9 @@
 Revision history for Dist-Zilla-Plugin-MakeMaker-Awesome
 
+0.26      2014-09-16 02:20:28Z
+    - new 'preamble' and 'postamble' options renamed to 'header' and 'footer',
+      to avoid confusion with MY::preamble and MY::postamble
+
 0.25      2014-09-13 21:17:40Z
     - add new 'preamble' and 'postamble' options, as well as overridable
       builder subs, for inserting code at the top and bottom of Makefile.PL

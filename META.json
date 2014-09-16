@@ -173,7 +173,7 @@
    "provides" : {
       "Dist::Zilla::Plugin::MakeMaker::Awesome" : {
          "file" : "lib/Dist/Zilla/Plugin/MakeMaker/Awesome.pm",
-         "version" : "0.25"
+         "version" : "0.26"
       }
    },
    "release_status" : "stable",
@@ -191,7 +191,7 @@
       "x_IRC" : "irc://irc.perl.org/#distzilla",
       "x_MailingList" : "http://dzil.org/#mailing-list"
    },
-   "version" : "0.25",
+   "version" : "0.26",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.021003"
@@ -732,7 +732,7 @@
                }
             },
             "name" : "@Author::ETHER/ModuleBuildTiny::Fallback",
-            "version" : "0.006"
+            "version" : "0.007"
          },
          {
             "class" : "Dist::Zilla::Plugin::InstallGuide",
@@ -910,7 +910,7 @@
                "Dist::Zilla::Plugin::Git::Tag" : {
                   "branch" : null,
                   "signed" : 0,
-                  "tag" : "v0.25",
+                  "tag" : "v0.26",
                   "tag_format" : "v%v%t",
                   "tag_message" : "v%v%t",
                   "time_zone" : "local"
