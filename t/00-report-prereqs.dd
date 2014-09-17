@@ -26,6 +26,7 @@ do { my $x = {
                                       'Dist::Zilla::Plugin::EOLTests' => '0',
                                       'Dist::Zilla::Plugin::ExecDir' => '0',
                                       'Dist::Zilla::Plugin::FileFinder::ByName' => '0',
+                                      'Dist::Zilla::Plugin::FileFinder::Filter' => '0',
                                       'Dist::Zilla::Plugin::GenerateFile::ShareDir' => '0',
                                       'Dist::Zilla::Plugin::Git::Check' => '0',
                                       'Dist::Zilla::Plugin::Git::CheckFor::CorrectBranch' => '0.004',

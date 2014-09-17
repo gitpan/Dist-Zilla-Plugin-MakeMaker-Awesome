@@ -42,7 +42,7 @@ no_index:
 provides:
   Dist::Zilla::Plugin::MakeMaker::Awesome:
     file: lib/Dist/Zilla/Plugin/MakeMaker/Awesome.pm
-    version: '0.26'
+    version: '0.27'
 requires:
   CPAN::Meta::Requirements: '2.121'
   Dist::Zilla::File::InMemory: '0'
@@ -62,7 +62,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-MakeMaker-Awesome
   homepage: https://github.com/avar/dist-zilla-plugin-makemaker-awesome
   repository: https://github.com/avar/dist-zilla-plugin-makemaker-awesome.git
-version: '0.26'
+version: '0.27'
 x_Dist_Zilla:
   perl:
     version: '5.021003'
@@ -77,6 +77,10 @@ x_Dist_Zilla:
           try_built_method: mtime
       name: Bootstrap::lib
       version: '1.001000'
+    -
+      class: Dist::Zilla::Plugin::FileFinder::Filter
+      name: all_files_but_tabs_test
+      version: '5.020'
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
@@ -193,19 +197,6 @@ x_Dist_Zilla:
           skips: []
       name: '@Author::ETHER/Test::Compile'
       version: '2.046'
-    -
-      class: Dist::Zilla::Plugin::Test::NoTabs
-      config:
-        Dist::Zilla::Plugin::Test::NoTabs:
-          filename: xt/author/no-tabs.t
-          finder:
-            - ':InstallModules'
-            - ':ExecFiles'
-            - '@Author::ETHER/Examples'
-            - ':TestFiles'
-            - '@Author::ETHER/ExtraTestFiles'
-      name: '@Author::ETHER/Test::NoTabs'
-      version: '0.09'
     -
       class: Dist::Zilla::Plugin::EOLTests
       name: '@Author::ETHER/EOLTests'
@@ -608,7 +599,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: v0.26
+          tag: v0.27
           tag_format: v%v%t
           tag_message: v%v%t
           time_zone: local
@@ -642,6 +633,15 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::ConfirmRelease
       name: '@Author::ETHER/ConfirmRelease'
       version: '5.020'
+    -
+      class: Dist::Zilla::Plugin::Test::NoTabs
+      config:
+        Dist::Zilla::Plugin::Test::NoTabs:
+          filename: xt/author/no-tabs.t
+          finder:
+            - all_files_but_tabs_test
+      name: Test::NoTabs
+      version: '0.09'
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:

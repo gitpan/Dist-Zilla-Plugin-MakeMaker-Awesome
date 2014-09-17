@@ -18,6 +18,7 @@ t/02-perl-normalization.t
 t/03-dump-config.t
 t/04-overrides.t
 t/05-simple-configs.t
+t/06-delimiter-whitespace.t
 t/zzz-check-breaks.t
 weaver.ini
 xt/author/00-compile.t

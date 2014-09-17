@@ -1,6 +1,6 @@
 package Dist::Zilla::Plugin::MakeMaker::Awesome;
-# git description: v0.25-2-gd46a488
-$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.26';
+# git description: v0.26-4-ge0fe9a2
+$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.27';
 # ABSTRACT: A more awesome MakeMaker plugin for L<Dist::Zilla>
 # KEYWORDS: plugin installer MakeMaker Makefile.PL toolchain customize override
 
@@ -86,6 +86,24 @@ TEMPLATE
 
   return $template;
 }
+
+around BUILDARGS => sub
+{
+    my $orig = shift;
+    my $class = shift;
+
+    my $args = $class->$orig(@_);
+
+    if (length(my $delimiter = delete $args->{delimiter}))
+    {
+        foreach my $arg (grep { exists $args->{$_} } qw(WriteMakefile_arg_strs header_strs footer_strs))
+        {
+            s/^\Q$delimiter\E// foreach @{$args->{$arg}};
+        }
+    }
+
+    return $args;
+};
 
 has WriteMakefile_arg_strs => (
     is => 'ro', isa => ArrayRef[Str],
@@ -374,7 +392,7 @@ Dist::Zilla::Plugin::MakeMaker::Awesome - A more awesome MakeMaker plugin for L<
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 SYNOPSIS
 
@@ -384,11 +402,12 @@ In your F<dist.ini>:
     WriteMakefile_arg = CCFLAGS => `pkg-config --cflags libpng`
     WriteMakefile_arg = LIBS => [ `pkg-config --libs libpng` ]
     header = die 'Unsupported OS' if $^O eq 'MSWin32';
-    footer = package MY;
-    footer = sub postamble {
-    footer =     my $self = shift;
-    footer =     return $self->SUPER::postamble . "\n\nfoo: bar\n\t$(CP) bar foo\n";
-    footer = }
+    delimiter = |
+    footer = |package MY;
+    footer = |sub postamble {
+    footer = |    my $self = shift;
+    footer = |    return $self->SUPER::postamble . "\n\nfoo: bar\n\t$(CP) bar foo\n";
+    footer = |}
 
 or:
 
@@ -438,6 +457,15 @@ A line of code which is included near the top of F<Makefile.PL>.  Can be used mo
 =head2 footer
 
 A line of code which is included at the bottom of F<Makefile.PL>.  Can be used more than once.
+
+=head2 delimiter
+
+A string, usually a single character, which is stripped from the beginning of
+all C<WriteMakefile_arg>, C<header>, and C<footer> lines. This is because the
+INI file format strips all leading whitespace from option values, so including
+this character at the front allows you to use leading whitespace in an option
+string.  This is crucial for the formatting of F<Makefile>s, but a nice thing
+to have when inserting any block of code.
 
 =head2 test_file
 
@@ -664,6 +692,27 @@ configuration file like you can with L<Module::Install>.
 The F<.ini> file format can only support key-value pairs whereas any
 complex use of L<ExtUtils::MakeMaker> requires running custom Perl
 code and passing complex data structures to C<WriteMakefile>.
+
+=head1 AFTERWORD
+
+     ________________________
+    < everything is AWESOME! >
+     ------------------------
+        \                                  ___-------___
+         \                             _-~~             ~~-_
+          \                         _-~                    /~-_
+                 /^\__/^\         /~  \                   /    \
+               /|  O|| O|        /      \_______________/        \
+              | |___||__|      /       /                \          \
+              |          \    /      /                    \          \
+              |   (_______) /______/                        \_________ \
+              |         / /         \                      /            \
+               \         \^\\         \                  /               \     /
+                 \         ||           \______________/      _-_       //\__//
+                   \       ||------_-~~-_ ------------- \ --/~   ~\    || __/
+                     ~-----||====/~     |==================|       |/~~~~~
+                      (_(__/  ./     /                    \_\      \.
+                             (_(___/                         \_____)_)
 
 =head1 AUTHOR
 

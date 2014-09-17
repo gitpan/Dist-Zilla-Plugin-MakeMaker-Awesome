@@ -70,7 +70,7 @@ EOW
         "\x{c6}var Arnfj\x{f6}r\x{f0} Bjarmason <avar\@cpan.org>"
       ],
       "dist_name" => "Dist-Zilla-Plugin-MakeMaker-Awesome",
-      "dist_version" => "0.26",
+      "dist_version" => "0.27",
       "license" => "perl",
       "module_name" => "Dist::Zilla::Plugin::MakeMaker::Awesome",
       "recommends" => {},
