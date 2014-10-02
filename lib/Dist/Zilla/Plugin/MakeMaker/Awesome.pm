@@ -1,6 +1,6 @@
 package Dist::Zilla::Plugin::MakeMaker::Awesome;
-# git description: v0.26-4-ge0fe9a2
-$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.27';
+# git description: v0.27-2-g3d756f8
+$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.28';
 # ABSTRACT: A more awesome MakeMaker plugin for L<Dist::Zilla>
 # KEYWORDS: plugin installer MakeMaker Makefile.PL toolchain customize override
 
@@ -94,7 +94,8 @@ around BUILDARGS => sub
 
     my $args = $class->$orig(@_);
 
-    if (length(my $delimiter = delete $args->{delimiter}))
+    my $delimiter = delete $args->{delimiter};
+    if (defined $delimiter and length($delimiter))
     {
         foreach my $arg (grep { exists $args->{$_} } qw(WriteMakefile_arg_strs header_strs footer_strs))
         {
@@ -392,7 +393,7 @@ Dist::Zilla::Plugin::MakeMaker::Awesome - A more awesome MakeMaker plugin for L<
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 SYNOPSIS
 
