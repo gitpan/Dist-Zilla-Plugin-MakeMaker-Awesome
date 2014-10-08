@@ -1,5 +1,10 @@
 Revision history for Dist-Zilla-Plugin-MakeMaker-Awesome
 
+0.29      2014-10-08 04:26:08Z
+   - retain MIN_PERL_VERSION argument to WriteMakefile()
+   - extract the minimum perl requirement from all prereq phases, not just
+     runtime
+
 0.28      2014-10-02 04:31:44Z
    - fix test failure caused by unstated assumption that
      Dist::Zilla::Role::TestRunner is a very recent version

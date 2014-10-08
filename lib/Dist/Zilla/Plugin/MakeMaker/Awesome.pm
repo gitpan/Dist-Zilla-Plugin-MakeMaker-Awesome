@@ -1,6 +1,6 @@
 package Dist::Zilla::Plugin::MakeMaker::Awesome;
-# git description: v0.27-2-g3d756f8
-$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.28';
+# git description: v0.28-2-gc09e69b
+$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.29';
 # ABSTRACT: A more awesome MakeMaker plugin for L<Dist::Zilla>
 # KEYWORDS: plugin installer MakeMaker Makefile.PL toolchain customize override
 
@@ -120,6 +120,7 @@ has WriteMakefile_args => (
     handles       => {
         WriteMakefile_args => 'elements',
         delete_WriteMakefile_arg => 'delete',
+        WriteMakefile_arg => 'get',
     },
     lazy          => 1,
     builder       => '_build_WriteMakefile_args',
@@ -134,7 +135,11 @@ sub _build_WriteMakefile_args {
 
     my $prereqs = $self->zilla->prereqs;
     my $perl_prereq = $prereqs->requirements_for(qw(runtime requires))
-    ->as_string_hash->{perl};
+       ->clone
+       ->add_requirements($prereqs->requirements_for(qw(configure requires)))
+       ->add_requirements($prereqs->requirements_for(qw(build requires)))
+       ->add_requirements($prereqs->requirements_for(qw(test requires)))
+       ->as_string_hash->{perl};
 
     $perl_prereq = version->parse($perl_prereq)->numify if $perl_prereq;
 
@@ -350,7 +355,7 @@ sub setup_installer
     $self->log_fatal("can't install files with whitespace in their names")
         if grep { /\s/ } @{$self->exe_files};
 
-    my $perl_prereq = $self->delete_WriteMakefile_arg('MIN_PERL_VERSION');
+    my $perl_prereq = $self->WriteMakefile_arg('MIN_PERL_VERSION');
 
     # file was already created; find it and fill in the content
     my $file = first { $_->name eq 'Makefile.PL' } @{$self->zilla->files};
@@ -393,7 +398,7 @@ Dist::Zilla::Plugin::MakeMaker::Awesome - A more awesome MakeMaker plugin for L<
 
 =head1 VERSION
 
-version 0.28
+version 0.29
 
 =head1 SYNOPSIS
 
