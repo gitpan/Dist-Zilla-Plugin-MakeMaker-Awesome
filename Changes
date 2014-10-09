@@ -1,5 +1,9 @@
 Revision history for Dist-Zilla-Plugin-MakeMaker-Awesome
 
+0.30      2014-10-09 02:53:56Z
+   - use a listref for AUTHOR argument to WriteMakefile(), but only when the
+     EUMM version available is already high enough to accomodate it
+
 0.29      2014-10-08 04:26:08Z
    - retain MIN_PERL_VERSION argument to WriteMakefile()
    - extract the minimum perl requirement from all prereq phases, not just

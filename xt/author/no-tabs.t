@@ -15,6 +15,7 @@ my @files = (
     't/03-dump-config.t',
     't/04-overrides.t',
     't/05-simple-configs.t',
+    't/07-authors.t',
     't/zzz-check-breaks.t'
 );
 
