@@ -1,5 +1,8 @@
 Revision history for Dist-Zilla-Plugin-MakeMaker-Awesome
 
+0.31      2014-10-10 05:25:42Z
+   - fix failing tests on 5.8.x
+
 0.30      2014-10-09 02:53:56Z
    - use a listref for AUTHOR argument to WriteMakefile(), but only when the
      EUMM version available is already high enough to accomodate it

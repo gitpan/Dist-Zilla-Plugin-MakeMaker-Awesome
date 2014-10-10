@@ -1,6 +1,6 @@
 package Dist::Zilla::Plugin::MakeMaker::Awesome;
-# git description: v0.29-2-gb74ef31
-$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.30';
+# git description: v0.30-1-g140c311
+$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.31';
 # ABSTRACT: A more awesome MakeMaker plugin for L<Dist::Zilla>
 # KEYWORDS: plugin installer MakeMaker Makefile.PL toolchain customize override
 
@@ -430,7 +430,7 @@ Dist::Zilla::Plugin::MakeMaker::Awesome - A more awesome MakeMaker plugin for L<
 
 =head1 VERSION
 
-version 0.30
+version 0.31
 
 =head1 SYNOPSIS
 

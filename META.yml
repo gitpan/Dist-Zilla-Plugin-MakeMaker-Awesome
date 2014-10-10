@@ -42,7 +42,7 @@ no_index:
 provides:
   Dist::Zilla::Plugin::MakeMaker::Awesome:
     file: lib/Dist/Zilla/Plugin/MakeMaker/Awesome.pm
-    version: '0.30'
+    version: '0.31'
 requires:
   CPAN::Meta::Requirements: '2.121'
   Dist::Zilla::File::InMemory: '0'
@@ -62,7 +62,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-MakeMaker-Awesome
   homepage: https://github.com/avar/dist-zilla-plugin-makemaker-awesome
   repository: https://github.com/avar/dist-zilla-plugin-makemaker-awesome.git
-version: '0.30'
+version: '0.31'
 x_Dist_Zilla:
   perl:
     version: '5.021003'
@@ -196,7 +196,7 @@ x_Dist_Zilla:
             - '@Author::ETHER/Examples'
           skips: []
       name: '@Author::ETHER/Test::Compile'
-      version: '2.046'
+      version: '2.047'
     -
       class: Dist::Zilla::Plugin::EOLTests
       name: '@Author::ETHER/EOLTests'
@@ -599,7 +599,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: v0.30
+          tag: v0.31
           tag_format: v%v%t
           tag_message: v%v%t
           time_zone: local
