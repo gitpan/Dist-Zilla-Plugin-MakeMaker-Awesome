@@ -1,13 +1,12 @@
 package Dist::Zilla::Plugin::MakeMaker::Awesome;
-# git description: v0.30-1-g140c311
-$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.31';
+# git description: v0.31-3-gbb798b7
+{ our $VERSION = '0.32'; }
 # ABSTRACT: A more awesome MakeMaker plugin for L<Dist::Zilla>
 # KEYWORDS: plugin installer MakeMaker Makefile.PL toolchain customize override
 
 use Moose;
 use MooseX::Types::Moose qw< Str ArrayRef HashRef >;
 use MooseX::Types::Stringlike 'Stringlike';
-use Moose::Autobox;
 use namespace::autoclean;
 use CPAN::Meta::Requirements 2.121; # requirements_for_module
 use List::Util 'first';
@@ -53,7 +52,7 @@ use strict;
 use warnings;
 
 {{ $perl_prereq ? qq[use $perl_prereq;] : ''; }}
-use ExtUtils::MakeMaker{{ $eumm_version ? " $eumm_version" : '' }};
+use ExtUtils::MakeMaker{{ defined $eumm_version && 0+$eumm_version ? ' ' . $eumm_version : '' }};
 
 {{ $header }}
 
@@ -237,7 +236,7 @@ sub _build_test_files {
     my ($self) = @_;
 
     my %test_files;
-    for my $file ($self->zilla->files->flatten) {
+    for my $file (@{ $self->zilla->files }) {
         next unless $file->name =~ m{\At/.+\.t\z};
         (my $pattern = $file->name) =~ s{/[^/]+\.t\z}{/*.t}g;
 
@@ -258,8 +257,7 @@ has exe_files => (
 sub _build_exe_files {
     my ($self) = @_;
 
-    my @exe_files =
-        $self->zilla->find_files(':ExecFiles')->map(sub { $_->name })->flatten;
+    my @exe_files = map { $_->name } @{ $self->zilla->find_files(':ExecFiles') };
 
     return \@exe_files;
 }
@@ -430,7 +428,7 @@ Dist::Zilla::Plugin::MakeMaker::Awesome - A more awesome MakeMaker plugin for L<
 
 =head1 VERSION
 
-version 0.31
+version 0.32
 
 =head1 SYNOPSIS
 
