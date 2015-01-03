@@ -1,9 +1,7 @@
-package Dist::Zilla::Plugin::MakeMaker::Awesome;
-# git description: v0.31-3-gbb798b7
-{ our $VERSION = '0.32'; }
+package Dist::Zilla::Plugin::MakeMaker::Awesome; # git description: v0.32-1-g1fa423b
 # ABSTRACT: A more awesome MakeMaker plugin for L<Dist::Zilla>
 # KEYWORDS: plugin installer MakeMaker Makefile.PL toolchain customize override
-
+$Dist::Zilla::Plugin::MakeMaker::Awesome::VERSION = '0.33';
 use Moose;
 use MooseX::Types::Moose qw< Str ArrayRef HashRef >;
 use MooseX::Types::Stringlike 'Stringlike';
@@ -428,7 +426,7 @@ Dist::Zilla::Plugin::MakeMaker::Awesome - A more awesome MakeMaker plugin for L<
 
 =head1 VERSION
 
-version 0.32
+version 0.33
 
 =head1 SYNOPSIS
 
@@ -762,7 +760,7 @@ code and passing complex data structures to C<WriteMakefile>.
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Ævar Arnfjörð Bjarmason.
+This software is copyright (c) 2015 by Ævar Arnfjörð Bjarmason.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
